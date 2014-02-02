@@ -345,10 +345,7 @@ function decode() { // @return Mix:
     case 0xa0:  // utf8.decode
                 for (ary = [], i = _idx, iz = i + num; i < iz; ) {
                     c = buf[++i]; // lead byte
-                    ary.push(c < 0x80 ? c : // ASCII(0x00 ~ 0x7f)
-                             c < 0xe0 ? ((c & 0x1f) <<  6 | (buf[++i] & 0x3f)) :
-                                        ((c & 0x0f) << 12 | (buf[++i] & 0x3f) << 6
-                                                          | (buf[++i] & 0x3f)));
+                    ary.push(c);
                 }
                 _idx = i;
                 return ary.length < 10240 ? _toString.apply(null, ary)
